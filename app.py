@@ -20,6 +20,7 @@ model = load(output)
 
 
 
+
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get the data from the request
