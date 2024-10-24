@@ -1,11 +1,24 @@
 from flask import Flask, request, jsonify
 from joblib import load
 import numpy as np
+import gdown
 
-app = Flask(__name__)
+# URL of the model file on Google Drive
+url = 'https://cyberspaceinfrastructure-my.sharepoint.com/:u:/g/personal/amit_mydataup_onmicrosoft_com/EUwBA9E2-ONPpguKG49UMkIBXM37S-4fUOOMzqFcRa8nLA?e=sz7ehP'
+output = 'best_rf_model.joblib'
 
-# Load the saved Random Forest model
-model = load('best_rf_model.joblib')
+# Function to download the model file from cloud storage
+def download_model():
+    print("Downloading model...")
+    gdown.download(url, output, quiet=False)  # This downloads the model to your local system
+    print("Download complete.")
+
+# Download the model and load it
+download_model()
+model = load(output)
+# Download the model
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
